@@ -19,20 +19,67 @@
         <meta charset="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="<%= assetPrefix %>/deriv-logo.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-        <meta name="title" content="Automate Your Trades | Deriv Bot" />
+        <meta name="title" content="Giqui | Trading Bot" />
         <meta
             name="description"
-            content="Import your current bot or learn how to create a trading bot from scratch with our detailed guides, FAQs, and tutorials. Start with a quick strategy!"
+            content="Giqui is a visual trading bot builder for creating and automating trading strategies."
         />
-        <meta property="og:title" content="Deriv Bot" />
+        <meta property="og:title" content="Giqui | Trading Bot" />
         <meta
             property="og:description"
             content="Import your current bot or learn how to create a trading bot from scratch with our detailed guides, FAQs, and tutorials. Start with a quick strategy!"
         />
-        <title>Automate Your Trades | Deriv Bot</title>
+        <title>Giqui | Trading Bot</title>
         <style>
             :root {
                 font-size: 62.5%;
+            }
+        </style>
+    <style>
+            #giqui-loader {
+                position: fixed;
+                inset: 0;
+                z-index: 99999;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 1.2rem;
+                background: #ffffff;
+                font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            }
+            .giqui-loader-mark {
+                width: 7.2rem;
+                height: 7.2rem;
+                display: grid;
+                place-items: center;
+                border-radius: 1.8rem;
+                background: #ff444f;
+                color: #ffffff;
+                font-size: 3.8rem;
+                font-weight: 800;
+                box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.12);
+            }
+            .giqui-loader-name {
+                color: #111827;
+                font-size: 3rem;
+                font-weight: 800;
+                letter-spacing: -0.04em;
+            }
+            .giqui-loader-spinner {
+                width: 2.4rem;
+                height: 2.4rem;
+                border: 0.3rem solid #e5e7eb;
+                border-top-color: #ff444f;
+                border-radius: 50%;
+                animation: giqui-spin 0.8s linear infinite;
+            }
+            .giqui-loader-text {
+                color: #6b7280;
+                font-size: 1.4rem;
+            }
+            @keyframes giqui-spin {
+                to { transform: rotate(360deg); }
             }
         </style>
     </head>
@@ -51,7 +98,14 @@
 
         <div id="modal_root" class="modal-root"></div>
         <div id="popup_root" class="popup-root"></div>
-        <div id="root"></div>
+        <div id="root">
+            <div id="giqui-loader" aria-label="Loading Giqui">
+                <div class="giqui-loader-mark">G</div>
+                <div class="giqui-loader-name">Giqui</div>
+                <div class="giqui-loader-spinner" aria-hidden="true"></div>
+                <div class="giqui-loader-text">Starting Giqui...</div>
+            </div>
+        </div>
         <!-- LiveChat script -->
         <script type="text/javascript" defer>
             window.__lc = window.__lc || {};
