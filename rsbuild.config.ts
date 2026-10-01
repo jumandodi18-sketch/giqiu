@@ -7,7 +7,8 @@ import { pluginSass } from '@rsbuild/plugin-sass';
 // Heroku's build doesn't surface it otherwise; a missing file is a no-op.
 loadEnv({ mode: 'production' });
 
-const isStaticBuild = process.env.NEXT_PUBLIC_APP_BUILD === 'true';
+const isStaticBuild = process.env.NEXT_PUBLIC_APP_BUILD === 'true' || process.env.NEXT_PUBLIC_GITHUB_PAGES === 'true';
+const isGithubPages = process.env.NEXT_PUBLIC_GITHUB_PAGES === 'true';
 
 // Resolve smartcharts from wherever the package actually lives so the asset
 // copy works both standalone and inside the monorepo (npm workspaces hoist the
@@ -45,6 +46,7 @@ export default defineConfig({
         // Marks the static preview build (served under /bot/preview); drives the
         // router basename so React Router resolves under that path prefix.
         NEXT_PUBLIC_APP_BUILD: JSON.stringify(process.env.NEXT_PUBLIC_APP_BUILD ?? ''),
+        NEXT_PUBLIC_GITHUB_PAGES: JSON.stringify(process.env.NEXT_PUBLIC_GITHUB_PAGES ?? ''),
         GD_CLIENT_ID: JSON.stringify(process.env.GD_CLIENT_ID),
         GD_APP_ID: JSON.stringify(process.env.GD_APP_ID),
         GD_API_KEY: JSON.stringify(process.env.GD_API_KEY),
@@ -65,9 +67,9 @@ export default defineConfig({
     },
   },
   output: {
-    assetPrefix: isStaticBuild ? '/bot/preview/' : '/',
+    assetPrefix: isGithubPages ? '/giqiu/' : isStaticBuild ? '/bot/preview/' : '/',
     distPath: {
-      root: isStaticBuild ? 'out/preview' : 'dist',
+      root: 'dist',
     },
     copy: [
       {
